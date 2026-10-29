@@ -1,6 +1,4 @@
-from pathlib import Path
-
-readme = r'''# SHRiii — Brain Hemorrhage Detection and Classification Using Deep Learning
+SHRiii — Brain Hemorrhage Detection and Classification Using Deep Learning
 
 > **Project Status: In Progress**  
 > SHRiii is currently under development. The complete project and final documentation will be uploaded after implementation and testing are finished.
@@ -341,8 +339,3 @@ AI & Data Science Engineer | Python Developer | Computer Vision and Healthcare A
 Please preserve dataset attribution, licensing requirements, and the research-only limitations when using or extending this project.
 '''
 
-path = Path("/mnt/data/README.md")
-path.write_text(readme, encoding="utf-8")
-print(f"Created accurate README.md: {path.stat().st_size:,} bytes")
-print("\nOpening:\n")
-print("\n".join(readme.splitlines()[:10]))
