@@ -1,3 +1,22 @@
+
+from pathlib import Path
+
+path = Path("/mnt/data/README.md")
+content = path.read_text(encoding="utf-8")
+notice = """> **Project Status: In Progress**  
+> SHRiii is currently under development. We will upload the complete project and update this README when implementation and testing are finished.
+
+"""
+# Insert directly after the first H1 title.
+lines = content.splitlines(keepends=True)
+insert_at = 1
+# skip blank lines after title
+while insert_at < len(lines) and lines[insert_at].strip() == "":
+    insert_at += 1
+lines.insert(insert_at, notice + "\n")
+path.write_text("".join(lines), encoding="utf-8")
+print("Updated README.md with the project status notice.")
+
 SHRiii — Brain Hemorrhage Detection and Classification Using Deep Learning
 
 An AI-assisted medical imaging research project that uses Convolutional Neural Networks (CNNs) to classify brain CT scan images and aims to provide an accessible interface for model predictions and statistical analysis.
