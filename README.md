@@ -1,6 +1,4 @@
-from pathlib import Path
-
-content = r'''# SHRiii — Brain Hemorrhage Detection and Classification Using Deep Learning
+SHRiii — Brain Hemorrhage Detection and Classification Using Deep Learning
 
 An AI-assisted medical imaging research project that uses Convolutional Neural Networks (CNNs) to classify brain CT scan images and aims to provide an accessible interface for model predictions and statistical analysis.
 
