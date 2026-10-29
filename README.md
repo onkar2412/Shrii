@@ -1,22 +1,42 @@
- **Project Status: In Progress**  
-> SHRiii is currently under development. We will upload the complete project and update this README when implementation and testing are finished.
+from pathlib import Path
 
-"""
-# Insert directly after the first H1 title.
-lines = content.splitlines(keepends=True)
-insert_at = 1
-# skip blank lines after title
-while insert_at < len(lines) and lines[insert_at].strip() == "":
-    insert_at += 1
-lines.insert(insert_at, notice + "\n")
-path.write_text("".join(lines), encoding="utf-8")
-print("Updated README.md with the project status notice.")
+path = Path("/mnt/data/README.md")
+content = path.read_text(encoding="utf-8")
 
-SHRiii — Brain Hemorrhage Detection and Classification Using Deep Learning
+# Remove any accidental insertion of Python editing instructions if present.
+bad_fragments = [
+    "# Insert directly after the first H1 title.",
+    "lines = content.splitlines(keepends=True)",
+    "insert_at = 1",
+    'path.write_text("".join(lines), encoding="utf-8")',
+    'print("Updated README.md with the project status notice.")',
+]
+for fragment in bad_fragments:
+    content = content.replace(fragment, "")
 
-An AI-assisted medical imaging research project that uses Convolutional Neural Networks (CNNs) to classify brain CT scan images and aims to provide an accessible interface for model predictions and statistical analysis.
+# Normalize the beginning of the README.
+title = "# SHRiii — Brain Hemorrhage Detection and Classification Using Deep Learning"
+start = content.find(title)
+if start == -1:
+    # Support the original title without Markdown heading marker.
+    title_plain = "SHRiii — Brain Hemorrhage Detection and Classification Using Deep Learning"
+    start = content.find(title_plain)
+    if start == -1:
+        raise ValueError("Could not locate the README project title.")
+    title = "# " + title_plain
+    content = content[:start] + title + content[start + len(title_plain):]
+    start = content.find(title)
 
-> **Medical disclaimer:** SHRiii is a research and educational prototype, not a medical device. It is not intended to diagnose, treat, or rule out a brain hemorrhage. Do not use its predictions to make clinical decisions. CT scans must be assessed by qualified healthcare professionals.
+rest = content[start + len(title):].lstrip("\n")
+status = (
+    "> **Project Status: In Progress**  \n"
+    "> SHRiii is currently under development. The complete project and final documentation "
+    "will be uploaded once implementation and testing are finished.\n"
+)
+content = title + "\n\n" + status + "\n" + rest
+path.write_text(content, encoding="utf-8")
+print("README opening cleaned and project status notice placed directly below the title.")
+
 
 ---
 
