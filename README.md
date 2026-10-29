@@ -1,9 +1,4 @@
-
-from pathlib import Path
-
-path = Path("/mnt/data/README.md")
-content = path.read_text(encoding="utf-8")
-notice = """> **Project Status: In Progress**  
+ **Project Status: In Progress**  
 > SHRiii is currently under development. We will upload the complete project and update this README when implementation and testing are finished.
 
 """
